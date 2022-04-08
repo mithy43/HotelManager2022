@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelReservation.Data;
 using HotelReservation.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelReservation.Controllers
 {
@@ -45,6 +46,7 @@ namespace HotelReservation.Controllers
         }
 
         // GET: Rooms/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -55,6 +57,7 @@ namespace HotelReservation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,Capacity,Type,IsVacant,PricePerNightAdult,PricePerNightChild")] Room room)
         {
             if (ModelState.IsValid)
@@ -67,6 +70,7 @@ namespace HotelReservation.Controllers
         }
 
         // GET: Rooms/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,6 +91,7 @@ namespace HotelReservation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Capacity,Type,IsVacant,PricePerNightAdult,PricePerNightChild")] Room room)
         {
             if (id != room.Id)
@@ -118,6 +123,7 @@ namespace HotelReservation.Controllers
         }
 
         // GET: Rooms/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,6 +144,7 @@ namespace HotelReservation.Controllers
         // POST: Rooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var room = await _context.Rooms.FindAsync(id);

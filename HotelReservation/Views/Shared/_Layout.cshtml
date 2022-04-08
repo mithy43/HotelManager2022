@@ -28,14 +28,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <!--
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        -->
                         @if(SignInManager.IsSignedIn(User)){
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Rooms" asp-action="">All Rooms</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarReservations" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Reservations
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarReservations">
+                                    <li><a class="dropdown-item" asp-controller = "Reservations" asp-action = "Create">Create Reservation</a></li>
+                                    <li><a class="dropdown-item" href="#">Your Reservations</a></li>
+                                    @if(User.IsInRole("Administrator")){
+                                    <li><a class="dropdown-item" asp-controller = "Reservations" asp-action = "Index">View All Reservations</a></li>
+                                    }
+                            </ul>
                         </li>
                         }
                     </ul>

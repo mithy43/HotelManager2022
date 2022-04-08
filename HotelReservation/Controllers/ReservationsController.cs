@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelReservation.Data;
 using HotelReservation.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelReservation.Controllers
 {
@@ -21,6 +22,7 @@ namespace HotelReservation.Controllers
         }
 
         // GET: Reservations
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Index()
         {
             var hotelReservationContext = _context.Reservations.Include(r => r.Room).Include(r => r.User);
