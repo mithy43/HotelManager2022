@@ -22,7 +22,6 @@ namespace HotelReservation.Controllers
         }
 
         // GET: Reservations
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Index()
         {
             var hotelReservationContext = _context.Reservations.Include(r => r.Room).Include(r => r.User);
@@ -76,6 +75,7 @@ namespace HotelReservation.Controllers
         }
 
         // GET: Reservations/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,6 +98,7 @@ namespace HotelReservation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,RoomId,UserId,CheckIn,CheckOut,Breakfast,AllInclusive,Total")] Reservation reservation)
         {
             if (id != reservation.Id)

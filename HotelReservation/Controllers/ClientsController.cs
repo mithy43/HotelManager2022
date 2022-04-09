@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelReservation.Data;
 using HotelReservation.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelReservation.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ClientsController : Controller
     {
         private readonly HotelReservationContext _context;
